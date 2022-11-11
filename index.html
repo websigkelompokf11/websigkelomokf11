@@ -1,0 +1,63 @@
+<html>
+    <head>
+	<link rel="stylesheet" href="leaflet/leaflet.css"/>
+	<script src="leaflet/leaflet.js"></script>
+	
+	<link rel="stylesheet" href="leaflet/leaflet.groupedlayercontrol.css"/>
+	<script src="leaflet/leaflet.groupedlayercontrol.js"></script>
+
+    </head>
+   <body>
+<!-- peta akan ditampilkan disini -->
+         <div style="height:500px" id="mapid"></div>
+    </body>
+	
+	<script src="Gorontalo.js"></script>
+	
+	<script>
+   var mymap = L.map('mapid').setView([0.5517543,123.049547], 12);
+   var GoogleMaps = new L.TileLayer('https://mt1.google.com/vt/lyrs=m&x={x}&y={y}&z={z}', { 
+     opacity: 1.0, attribution: 'Ketrampilan Berkehidupan dan WEBSIG UMS'
+}).addTo(mymap);
+var GoogleSatelliteHybrid = L.tileLayer('https://mt1.google.com/vt/lyrs=y&x={x}&y={y}&z={z}', { 
+     maxZoom: 22, 
+     attribution: 'Ketrampilan Berkehidupan dan WEBSIG UMS' 
+});
+
+var baseLayers = {
+     'Google Satellite Hybrid': GoogleSatelliteHybrid,
+     'Google Maps': GoogleMaps,
+}; 
+
+L.control.groupedLayers(baseLayers).addTo(mymap);
+var polyg2 = L.geoJson(polygons.features).addTo(mymap);
+
+var marker = L.marker([0.5322457126408342, 123.05970637822621]).addTo(mymap);
+
+marker.bindPopup("<b>Informasi</b><br>kantor walikota");
+
+var marker = L.marker([0.5362770683731507, 123.0607843829209]).addTo(mymap);
+
+marker.bindPopup("<b>Informasi</b><br>Kodim 1304");
+
+var marker = L.marker([0.5770990785899864, 123.06195947685497]).addTo(mymap);
+
+marker.bindPopup("<b>Informasi</b><br>Kejaksaan Negeri");
+
+var marker = L.marker([0.5242196512359331, 123.06139954987455]).addTo(mymap);
+
+marker.bindPopup("<b>Informasi</b><br>Polres Gorontalo");
+
+L.control.scale().addTo(mymap);
+
+var north = L.control({position: "bottomright"});
+north.onAdd = function(mymap) {
+    var div = L.DomUtil.create("div", "info legend");
+    div.innerHTML = '<img src="north arrow.png">';
+    return div;
+}
+north.addTo(mymap);
+
+</script>
+
+</html>
